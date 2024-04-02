@@ -27,8 +27,8 @@ body {
     .mh-all {
         @apply min-h-[calc(100vh-10px)]
     }
-    .mh-body {
-        @apply min-h-[calc(100vh-98px)]
+    .page-parent {
+        @apply min-h-[calc(100vh-90px)]
     }
     .action-button {
         @apply bg-bg rounded-lg h-full w-[60px] fc mr-[10px]

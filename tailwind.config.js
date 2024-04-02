@@ -9,8 +9,8 @@ export default {
       colors: {
         "bg": "#22272e",
         "bgdark": "#1c2128",
-        "main": "#4a148c",
-        "maindark": "#3e1275",
+        "main": "#2563eb",
+        "maindark": "#1b46a6",
         "secondary": "#03a9f4",
         "secondarydark": "#0276aa",
         "success": "#27ea60",
@@ -21,7 +21,6 @@ export default {
         "hr": "#444c56",
         "hrdark": "#292e36",
         "textlight": "#9ca3af",
-        "admin": "#2563eb"
       },
     },
   },
