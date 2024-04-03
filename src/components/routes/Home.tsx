@@ -1,15 +1,8 @@
-import React from 'react'
-import { useUser } from '../../App'
+//import React from 'react'
 
 const Home = () => {
-    const { user } = useUser()
-
-    React.useEffect(() => {
-        console.log(user)
-    }, [])
-
     return (
-        <div>Home</div>
+        <div className='fc text-2xl outlet w-full'>Select a page from the side bar to get started.</div>
     )
 }
 

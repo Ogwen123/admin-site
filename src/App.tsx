@@ -21,7 +21,7 @@ const App = () => {
                 setUser({ token: userData })
             }
         }
-    })
+    }, [])
 
 
 
