@@ -6,8 +6,8 @@ import LoadingWheel from '../LoadingWheel'
 
 const Login = () => {
 
-    const [username, setUsername] = React.useState<string>()
-    const [password, setPassword] = React.useState<string>()
+    const [username, setUsername] = React.useState<string>("")
+    const [password, setPassword] = React.useState<string>("")
 
     const [submitting, setSubmitting] = React.useState<boolean>(false)
     const [alert, setAlert] = React.useState<_Alert>(["Alert", "ERROR", false])
@@ -48,38 +48,51 @@ const Login = () => {
 
     return (
         <div className='fc page-parent flex-col'>
-            <Alert content={alert[0] instanceof Array ? alert[0][1] : alert[0]} severity={alert[1]} show={alert[2]} title={alert[0] instanceof Array ? alert[0][0] : undefined} />
+            <Alert
+                content={alert[0] instanceof Array ? alert[0][1] : alert[0]}
+                severity={alert[1]}
+                show={alert[2]}
+                title={alert[0] instanceof Array ? alert[0][0] : undefined}
+                width="40%"
+            />
             <div className='my-[20px] text-xl'>
                 Login to the admin dashboard
             </div>
             <div className='w-1/5 mb-[70px] relative cursor-pointer'>{/* bottom margin is to raise the form up a bit */}
-                <input
-                    className='form-input'
-                    placeholder='Username'
-                    value={username}
-                    onChange={(e) => {
-                        setUsername(e.target.value)
-                    }}
-                ></input>
-                <input
-                    className='form-input'
-                    placeholder='Password'
-                    type='password'
-                    value={password}
-                    onChange={(e) => {
-                        setPassword(e.target.value)
-                    }}
-                ></input>
-                <button className='button h-[44px]' onClick={() => {
+                <form onSubmit={(e) => {
+                    e.preventDefault()
                     login()
                 }}>
-                    {
-                        submitting ?
-                            <LoadingWheel size={24} />
-                            :
-                            <div>Submit</div>
-                    }
-                </button>
+                    <input
+                        className='form-input'
+                        placeholder='Username'
+                        value={username}
+                        onChange={(e) => {
+                            setUsername(e.target.value)
+                        }}
+                    ></input>
+                    <input
+                        className='form-input'
+                        placeholder='Password'
+                        type='password'
+                        value={password}
+                        onChange={(e) => {
+                            setPassword(e.target.value)
+                        }}
+                    ></input>
+                    <button type="submit" className='button h-[44px]' onClick={(e) => {
+                        e.preventDefault()
+                        login()
+                    }}>
+                        {
+                            submitting ?
+                                <LoadingWheel size={24} />
+                                :
+                                <div>Submit</div>
+                        }
+                    </button>
+                </form>
+
             </div>
         </div>
     )

@@ -6,16 +6,22 @@ interface AlertProps {
     content: string
     severity: "SUCCESS" | "ERROR"
     show: boolean,
-    title?: string
+    title?: string,
+    width?: string
 }
 
-const Alert = ({ content, severity, show, title }: AlertProps) => {
+const Alert = ({ content, severity, show, title, width = "100%" }: AlertProps) => {
     let colour = severity === "ERROR" ? "bg-error" : "bg-success"
 
     return (
         show ?
 
-            <div className={`flex items-center bg-bgdark rounded-md w-2/5 overflow-hidden`}>
+            <div
+                className={`flex items-center bg-bgdark rounded-md overflow-hidden`}
+                style={{
+                    width: width
+                }}
+            >
                 <div className={colour + " self-start fc h-[70px] w-[50px] p-[5px]"}>
                     {
                         severity === "ERROR" ?

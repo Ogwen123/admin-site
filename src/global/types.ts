@@ -5,16 +5,30 @@ export type User = {
 }
 
 export type AppOutletContext = {
-    user: User
+    user: User,
+    updateSidebar: boolean,
+    setUpdateSidebar: React.Dispatch<React.SetStateAction<boolean | undefined>>
 }
 
 export type _Alert = [string | [string, string], "SUCCESS" | "ERROR", boolean]
+
+export type SubSite = {
+    id: number,
+    name: string,
+    url: string,
+}
 
 export type SidebarTab = {
     id: number,
     name: string,
     url: string,
-    icon: React.ReactElement
+    icon: React.ReactElement,
+    subSites?: SubSite[]
+}
+
+export type SubSelected = {
+    parentId: number,
+    name: string
 }
 
 export type ShallowServiceData = {

@@ -6,6 +6,7 @@ import { AppOutletContext, User } from './global/types'
 const App = () => {
 
     const [user, setUser] = React.useState<User>()
+    const [updateSidebar, setUpdateSidebar] = React.useState<boolean>()
 
     React.useEffect(() => {
         const userData = localStorage.getItem("token")
@@ -28,7 +29,7 @@ const App = () => {
     return (
         <div className='min-h-[100vh]'>
             <NavigationBar />
-            <Outlet context={{ user }} />
+            <Outlet context={{ user, updateSidebar, setUpdateSidebar }} />
         </div>
     )
 }

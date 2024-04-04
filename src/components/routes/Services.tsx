@@ -5,13 +5,14 @@ import { useUser } from '../../App'
 import Alert, { alertReset } from '../Alert'
 import LoadingWheel from '../LoadingWheel'
 import { Listbox } from '@headlessui/react'
-import { ChevronDownIcon } from '@heroicons/react/20/solid'
+import { ChevronDownIcon, PlusIcon } from '@heroicons/react/20/solid'
 import ServiceChip from '../services/ServiceChip'
+import { Link } from 'react-router-dom'
 
 const initalFilter: ServicesFilters = { search: "", filter: "NONE" }
 
 const Services = () => {
-    const { user } = useUser()
+    const { user, updateSidebar, setUpdateSidebar } = useUser()
 
     const [services, setServices] = React.useState<ShallowServiceData[]>()
     const [shownServices, setShownServices] = React.useState<ShallowServiceData[]>()
@@ -119,18 +120,18 @@ const Services = () => {
                             />
                         </Listbox.Button>
                         <Listbox.Options
-                            className="z-1 bg-bgdark p-[10px] mt-[10px] rounded-md"
+                            className="z-1 bg-main bg-opacity-20 p-[10px] mt-[10px] rounded-md"
                         >
                             <Listbox.Option
                                 value="FRONTEND"
-                                className={"p-[5px] rounded-md" + (filters.filter === "FRONTEND" ? " bg-main" : "bg-bgdark")}
+                                className={"p-[5px] rounded-md mt-[5px]" + (filters.filter === "FRONTEND" ? " bg-main" : "bg-main bg-opacity-20 hover:bg-main hover:bg-opacity-30")}
                             >
                                 Frontend
                             </Listbox.Option>
 
                             <Listbox.Option
                                 value="BACKEND"
-                                className={"p-[5px] rounded-md" + (filters.filter === "BACKEND" ? " bg-main" : "bg-bgdark")}
+                                className={"p-[5px] rounded-md mt-[5px]" + (filters.filter === "BACKEND" ? " bg-main" : "bg-main bg-opacity-20 hover:bg-main hover:bg-opacity-30")}
                             >
                                 Backend
                             </Listbox.Option>
@@ -148,13 +149,21 @@ const Services = () => {
             </div>
             {
                 shownServices ?
-                    shownServices?.map((service, index) => {
-                        return (
-                            <div key={index}>
-                                <ServiceChip service={service} setServices={setServices} />
-                            </div>
-                        )
-                    })
+                    <div>
+                        {
+                            shownServices?.map((service, index) => {
+                                return (
+                                    <div key={index}>
+                                        <ServiceChip service={service} setServices={setServices} />
+                                    </div>
+                                )
+                            })
+                        }
+                        <Link className='button fc flex-row' to="/services/add" onClick={() => setUpdateSidebar(!updateSidebar)}>
+                            <PlusIcon className='h-5 w-5' />
+                            New Service
+                        </Link>
+                    </div>
                     :
                     <div className='my-[10px]'>
                         <LoadingWheel />
