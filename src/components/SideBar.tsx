@@ -95,7 +95,7 @@ const SideBar = () => {
                         subSelected && subSelected.parentId === tab.id ?
                             <div key={index}>
                                 <Link
-                                    className={'flex flex-row m-[10px] p-[10px] rounded-md' + colour}
+                                    className='flex flex-row m-[10px] p-[10px] rounded-md bg-main bg-opacity-60'
                                     to={tab.url}
                                     onClick={() => {
                                         setSelected(tab.id)
@@ -112,7 +112,7 @@ const SideBar = () => {
                                         viewBox="0 0 45 20">
                                         <polyline className="fill-none stroke-hr stroke-[2px]" points="12.25,5 23.25,16 12.25,27 " />
                                     </svg>
-                                    <div>
+                                    <div className='text-main'>
                                         {subSelected.name}
                                     </div>
                                 </div>
@@ -136,7 +136,7 @@ const SideBar = () => {
                 })
             }
             <button
-                className='mt-auto rounded-md w-[calc(100%-20px])] m-[10px] bg-error hover:bg-errordark p-[10px] h-[48px]'
+                className='rounded-md w-[calc(100%-20px])] m-[10px] bg-error hover:bg-errordark p-[10px] h-[48px]'
                 onClick={() => {
                     logout()
                 }}

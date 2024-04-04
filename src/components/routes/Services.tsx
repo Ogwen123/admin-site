@@ -42,7 +42,11 @@ const Services = () => {
     }, [filters])
 
     React.useEffect(() => {
-        setShownServices(services)
+        if (!services) {
+            setShownServices(services)
+            return
+        }
+        setShownServices(filter(services))
     }, [services])
 
     const filter = (toFilter: ShallowServiceData[]): ShallowServiceData[] => {
@@ -58,8 +62,6 @@ const Services = () => {
                 return filters.filter === service.type
             })
         }
-        console.log("results: ")
-        console.log(results)
         return results
     }
 
@@ -95,7 +97,7 @@ const Services = () => {
     return (
         <div>
             <Alert content={alert[0] instanceof Array ? alert[0][1] : alert[0]} severity={alert[1]} show={alert[2]} title={alert[0] instanceof Array ? alert[0][0] : undefined} />
-            <div className='flex flex-row w-full h-[55px]'>
+            <div className='flex flex-row w-full h-[55px] mt-[10px]'>
                 <input
                     value={filters.search}
                     className='form-input w-[70%] m-0'
@@ -154,7 +156,7 @@ const Services = () => {
                             shownServices?.map((service, index) => {
                                 return (
                                     <div key={index}>
-                                        <ServiceChip service={service} setServices={setServices} />
+                                        <ServiceChip service={service} setServices={setServices} setAlert={setAlert} />
                                     </div>
                                 )
                             })

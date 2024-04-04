@@ -37,7 +37,7 @@ export type ShallowServiceData = {
     alias: string,
     type: "BACKEND" | "FRONTEND",
     enabled: boolean,
-    togglable: boolean
+    toggleable: boolean
 }
 
 export type ServicesFilters = {

@@ -15,7 +15,7 @@ export const url = (type: "auth" | "admin") => {
         }
     } else {
         if (env === "prod") {
-            return "https://admin.owen-services.eu.org/api/"
+            return "https://admin-api.owen-services.eu.org/api/"
         } else {
             return "http://localhost:3002/api/"
         }
