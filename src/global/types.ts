@@ -31,7 +31,7 @@ export type SubSelected = {
     name: string
 }
 
-export type ShallowServiceData = {
+export type ServiceData = {
     id: string,
     name: string,
     alias: string,
@@ -40,7 +40,17 @@ export type ShallowServiceData = {
     toggleable: boolean
 }
 
+export type UserData = {
+    id: string,
+    username: string,
+    name: string,
+    email: string,
+    perm_flag: number
+}
+
 export type ServicesFilters = {
     search: string,
     filter: "BACKEND" | "FRONTEND" | "NONE"
 }
+
+export type Permissions = { [id: number]: string }

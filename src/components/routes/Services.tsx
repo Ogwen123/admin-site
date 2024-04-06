@@ -1,5 +1,5 @@
 import React from 'react'
-import { ServicesFilters, ShallowServiceData, _Alert } from '../../global/types'
+import { ServicesFilters, ServiceData, _Alert } from '../../global/types'
 import { url } from '../../utils/url'
 import { useUser } from '../../App'
 import Alert, { alertReset } from '../Alert'
@@ -14,8 +14,8 @@ const initalFilter: ServicesFilters = { search: "", filter: "NONE" }
 const Services = () => {
     const { user, updateSidebar, setUpdateSidebar } = useUser()
 
-    const [services, setServices] = React.useState<ShallowServiceData[]>()
-    const [shownServices, setShownServices] = React.useState<ShallowServiceData[]>()
+    const [services, setServices] = React.useState<ServiceData[]>()
+    const [shownServices, setShownServices] = React.useState<ServiceData[]>()
     const [filters, setFilters] = React.useState<ServicesFilters>(initalFilter)
 
     const [alert, setAlert] = React.useState<_Alert>(["Alert", "ERROR", false])
@@ -49,7 +49,7 @@ const Services = () => {
         setShownServices(filter(services))
     }, [services])
 
-    const filter = (toFilter: ShallowServiceData[]): ShallowServiceData[] => {
+    const filter = (toFilter: ServiceData[]): ServiceData[] => {
         let results = toFilter
         if (filters.search !== "") {
             results = results?.filter((service) => {
@@ -77,13 +77,13 @@ const Services = () => {
             setAlert(["Error when fetching services.", "ERROR", true])
             setTimeout(() => {
                 setAlert(alertReset)
-            }, 2000)
+            }, 5000)
             return
         }
 
         const data = await res.json()
 
-        const serviceData = data.data as ShallowServiceData[]
+        const serviceData = data.data as ServiceData[]
 
         localStorage.setItem("services", JSON.stringify({
             timeGot: Date.now(),

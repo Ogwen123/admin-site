@@ -1,13 +1,13 @@
 //import React from 'react'
 import { Switch } from '@headlessui/react'
-import { _Alert, ShallowServiceData } from '../../global/types'
+import { _Alert, ServiceData } from '../../global/types'
 import { url } from '../../utils/url'
 import { useUser } from '../../App'
 import { alertReset } from '../Alert'
 
 interface ServiceChipProps {
-    service: ShallowServiceData,
-    setServices: React.Dispatch<React.SetStateAction<ShallowServiceData[] | undefined>>,
+    service: ServiceData,
+    setServices: React.Dispatch<React.SetStateAction<ServiceData[] | undefined>>,
     setAlert: React.Dispatch<React.SetStateAction<_Alert>>
 }
 
@@ -16,7 +16,7 @@ const ServiceChip = ({ service, setServices, setAlert }: ServiceChipProps) => {
     const { user } = useUser()
 
     const flipToggle = (to?: boolean) => {
-        setServices((prevServices) => (prevServices?.map((prevService: ShallowServiceData) => {
+        setServices((prevServices) => (prevServices?.map((prevService: ServiceData) => {
             if (service.id === prevService.id) {
                 return {
                     ...prevService, enabled: (to !== undefined ? to : !prevService.enabled)
@@ -45,7 +45,7 @@ const ServiceChip = ({ service, setServices, setAlert }: ServiceChipProps) => {
                     setAlert([data.error instanceof Array ? data.error[0] : data.error, "ERROR", true])
                     setTimeout(() => {
                         setAlert(alertReset)
-                    }, 6000)
+                    }, 5000)
                     flipToggle()
                 })
             } else {
@@ -53,7 +53,7 @@ const ServiceChip = ({ service, setServices, setAlert }: ServiceChipProps) => {
                     setAlert(["Successfully toggled site.", "SUCCESS", true])
                     setTimeout(() => {
                         setAlert(alertReset)
-                    }, 2000)
+                    }, 5000)
                     flipToggle(data.data.enabled)
                 })
             }
