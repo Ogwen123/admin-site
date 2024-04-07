@@ -27,7 +27,7 @@ const App = () => {
 
 
     return (
-        <div className='min-h-[100vh]'>
+        <div className='min-h-[100vh] overflow-hidden'>
             <NavigationBar />
             <Outlet context={{ user, updateSidebar, setUpdateSidebar }} />
         </div>

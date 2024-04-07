@@ -12,9 +12,11 @@ const Users = () => {
     const { user } = useUser()
 
     const [users, setUsers] = React.useState<UserData[]>()
-    const [shownUsers, setShownUsers] = React.useState<UserData[]>()
     const [query, setQuery] = React.useState<string>("")
     const [permissions, setPermissions] = React.useState<Permissions>()
+
+    const [displayType, setDisplayType] = React.useState<"ADMIN" | "SEARCH">("ADMIN")
+    const [searchLoading, setSearchLoading] = React.useState<boolean>(false)
 
     const [alert, setAlert] = React.useState<_Alert>(["Alert", "ERROR", false])
 
@@ -34,31 +36,57 @@ const Users = () => {
                 })
             }
         })
-
-
-        if (localStorage.getItem("users") !== null) { // cache the services in localstorage and fetch them if cache is more than 10 seconds old
-            const userData = JSON.parse(localStorage.getItem("users")!)
-            if (userData.timeGot < Date.now() - 10 * 1000) {
-                fetchUsers()
-                return
-            } else {
-                setUsers(userData.services)
-                setShownUsers(userData.services)
-            }
-        } else {
-            fetchUsers()
-            return
-        }
+        fetchUsers()
     }, [])
 
     React.useEffect(() => {
-        if (query === "") {
-            setShownUsers(users)
+        console.log(users)
+    }, [users])
+
+    const searchUsers = async (queryOverride?: string) => {
+        if (query === "" || queryOverride === "") setDisplayType("ADMIN")
+        else setDisplayType("SEARCH")
+
+        setSearchLoading(true)
+        let res;
+
+        try {
+            res = await fetch(url("admin") + "users/search", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + user.token
+                },
+                body: JSON.stringify({
+                    query: (queryOverride !== undefined ? queryOverride : query)
+                })
+            })
+        } catch (e) {
+            setAlert(["Error when searching users.", "ERROR", true])
+            setSearchLoading(false)
+            setTimeout(() => {
+                setAlert(alertReset)
+            }, 5000)
+            return
         }
-    }, [query])
 
-    const searchUsers = () => {
+        if (!res.ok) {
+            setAlert(["Error when searching users.", "ERROR", true])
+            setSearchLoading(false)
+            setTimeout(() => {
+                setAlert(alertReset)
+            }, 5000)
+            return
+        }
 
+        const data = await res.json()
+
+        const userData = data.data as UserData[]
+
+        setPermissions((prevPerms) => ({ ...prevPerms }))
+
+        setUsers(userData)
+        setSearchLoading(false)
     }
 
     const fetchUsers = async () => {
@@ -81,17 +109,11 @@ const Users = () => {
 
         const userData = data.data as UserData[]
 
-        localStorage.setItem("users", JSON.stringify({
-            timeGot: Date.now(),
-            services: userData
-        }))
-
         setUsers(userData)
-        setShownUsers(userData)
     }
 
     return (
-        <div>
+        <div className='overflow-auto h-[calc(100vh-90px)]'>
             <Alert content={alert[0] instanceof Array ? alert[0][1] : alert[0]} severity={alert[1]} show={alert[2]} title={alert[0] instanceof Array ? alert[0][0] : undefined} />
             <div className='flex flex-row w-full h-[55px] mt-[10px]'>
                 <input
@@ -108,29 +130,54 @@ const Users = () => {
                         searchUsers()
                     }}
                 >
-                    Search
+                    {
+                        searchLoading ?
+                            <LoadingWheel size={24} />
+                            :
+                            <div>Search</div>
+                    }
                 </button>
                 <button
                     className='button w-[15%] bg-warning hover:bg-warningdark m-0'
                     onClick={() => {
+                        searchUsers("")
                         setQuery("")
                     }}
                 >
                     Clear Filters
                 </button>
             </div>
-            {
-                shownUsers ?
-                    shownUsers?.map((user, index) => {
-                        return (
-                            <UserChip userData={user} permissions={permissions} key={index} />
-                        )
-                    })
-                    :
-                    <div className='my-[10px]'>
-                        <LoadingWheel />
-                    </div>
-            }
+            <div className="mt-[10px] text-2xl">{displayType === "ADMIN" ? "Admins" : "Search Results"}</div>
+            <div className="flex flex-row flex-wrap">
+
+                {
+                    users && permissions ?
+                        users?.map((user, index) => {
+                            return (
+                                <div
+                                    key={index}
+                                    className="h-[250px]"
+                                    style={{
+                                        width: "calc((100% / 3) - " + (index % 3 === 0 ? "5px)" : index % 3 === 2 ? "5px)" : "10px)"),
+                                        marginLeft: (index % 3 === 0 ? "0px" : index % 3 === 2 ? "5px" : "5px"),
+                                        marginRight: (index % 3 === 0 ? "5px" : index % 3 === 2 ? "0px" : "5px")
+                                    }}
+                                >
+                                    <UserChip
+                                        userData={user}
+                                        permissions={permissions}
+                                        setUsers={setUsers}
+                                        setAlert={setAlert}
+                                    />
+                                </div>
+                            )
+                        })
+                        :
+                        <div className='my-[10px] fc w-full'>
+                            <LoadingWheel />
+                        </div>
+                }
+            </div>
         </div>
     )
 }

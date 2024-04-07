@@ -81,7 +81,7 @@ const SideBar = () => {
     }
 
     return (
-        <div className='page-parent border-r-solid border-r-hr border-r-[2px] min-w-[150px] w-[15vw] bg-bgdark flex flex-col'>
+        <div className='page-parent border-r-solid border-r-hr border-r-[2px] min-w-[150px] w-[15vw] bg-bgdark flex flex-col p-[10px]'>
             {
                 sidebarTabs.map((tab, index) => {
 
@@ -95,7 +95,7 @@ const SideBar = () => {
                         subSelected && subSelected.parentId === tab.id ?
                             <div key={index}>
                                 <Link
-                                    className='flex flex-row m-[10px] p-[10px] rounded-md bg-main bg-opacity-60'
+                                    className='flex flex-row mb-[10px] p-[10px] rounded-md bg-main bg-opacity-60'
                                     to={tab.url}
                                     onClick={() => {
                                         setSelected(tab.id)
@@ -119,7 +119,7 @@ const SideBar = () => {
                             </div>
                             :
                             <Link
-                                className={'flex flex-row m-[10px] p-[10px] rounded-md' + colour}
+                                className={'flex flex-row mb-[10px] p-[10px] rounded-md' + colour}
                                 to={tab.url}
                                 onClick={() => {
                                     setSelected(tab.id)
@@ -136,7 +136,7 @@ const SideBar = () => {
                 })
             }
             <button
-                className='rounded-md w-[calc(100%-20px])] m-[10px] bg-error hover:bg-errordark p-[10px] h-[48px]'
+                className='rounded-md w-[calc(100%-20px])] mt-auto mb-[10px] bg-error hover:bg-errordark p-[10px] h-[48px] '
                 onClick={() => {
                     logout()
                 }}

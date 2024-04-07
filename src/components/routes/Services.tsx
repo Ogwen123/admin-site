@@ -21,19 +21,7 @@ const Services = () => {
     const [alert, setAlert] = React.useState<_Alert>(["Alert", "ERROR", false])
 
     React.useEffect(() => {
-        if (localStorage.getItem("services") !== null) { // cache the services in localstorage and fetch them if cache is more than 10 seconds old
-            const serviceData = JSON.parse(localStorage.getItem("services")!)
-            if (serviceData.timeGot < Date.now() - 10 * 1000) {
-                fetchServices()
-                return
-            } else {
-                setServices(serviceData.services)
-                setShownServices(serviceData.services)
-            }
-        } else {
-            fetchServices()
-            return
-        }
+        fetchServices()
     }, [])
 
     React.useEffect(() => {
@@ -85,18 +73,17 @@ const Services = () => {
 
         const serviceData = data.data as ServiceData[]
 
-        localStorage.setItem("services", JSON.stringify({
-            timeGot: Date.now(),
-            services: serviceData
-        }))
-
         setServices(serviceData)
         setShownServices(serviceData)
     }
 
     return (
-        <div>
+        <div className='overflow-auto h-[calc(100vh-90px)]'>
             <Alert content={alert[0] instanceof Array ? alert[0][1] : alert[0]} severity={alert[1]} show={alert[2]} title={alert[0] instanceof Array ? alert[0][0] : undefined} />
+            <Link className='button fc flex-row' to="/services/add" onClick={() => setUpdateSidebar(!updateSidebar)}>
+                <PlusIcon className='h-5 w-5' />
+                New Service
+            </Link>
             <div className='flex flex-row w-full h-[55px] mt-[10px]'>
                 <input
                     value={filters.search}
@@ -161,10 +148,7 @@ const Services = () => {
                                 )
                             })
                         }
-                        <Link className='button fc flex-row' to="/services/add" onClick={() => setUpdateSidebar(!updateSidebar)}>
-                            <PlusIcon className='h-5 w-5' />
-                            New Service
-                        </Link>
+
                     </div>
                     :
                     <div className='my-[10px]'>
