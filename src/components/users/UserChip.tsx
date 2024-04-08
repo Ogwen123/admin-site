@@ -109,10 +109,10 @@ const UserChip = ({ userData, permissions, setUsers, setAlert }: UserChipProps) 
                                         return (
                                             <div key={index} className='fc flex-row'>
                                                 <div
-                                                    className={(permissionArr.includes(perm) ? "text-softsuccess" : "text-softerror") + " w-[10%]"}
+                                                    className={(permissionArr.includes(perm) ? "text-softsuccess" : "text-softerror") + " w-[60px]"}
                                                 >{perm}</div>
-                                                <hr className=' mx-[5px] max-w-[394px] ml-auto w-[85%]' />
-                                                <div className='w-[5%] fc'>
+                                                <hr className='' />
+                                                <div className='w-[25px] fc'>
                                                     <input
                                                         type="checkbox"
                                                         className='h-4 w-4 accent-main'
