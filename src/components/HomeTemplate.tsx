@@ -1,6 +1,6 @@
 //import React from 'react'
-import { useUser } from '../../App'
-import SideBar from '../SideBar'
+import { useUser } from '../App'
+import SideBar from './SideBar'
 import { Outlet } from 'react-router-dom'
 
 const HomeTemplate = () => {

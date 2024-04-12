@@ -54,3 +54,10 @@ export type ServicesFilters = {
 }
 
 export type Permissions = { [id: number]: string }
+
+export type Stats = {
+    users: number,
+    admins: number,
+    tables: number,
+    services: number
+}

@@ -9,13 +9,14 @@ import {
 import "./index.css";
 
 import Login from "./components/routes/Login";
-import HomeTemplate from "./components/routes/HomeTemplate";
+import HomeTemplate from "./components/HomeTemplate";
 import App from "./App";
 import Services from "./components/routes/Services";
 import Users from "./components/routes/Users";
 import Home from "./components/routes/Home";
 import AddService from "./components/routes/AddService";
 import NotFound from "./components/NotFound";
+import Statistics from "./components/routes/Statistics";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -25,6 +26,7 @@ const router = createBrowserRouter(
                 <Route path="/users" element={<Users />} />
                 <Route path="/services" element={<Services />} />
                 <Route path="/services/add" element={<AddService />} />
+                <Route path="/statistics" element={<Statistics />} />
                 <Route path="*" element={<NotFound />} />
             </Route>
             <Route path="/login" element={<Login />} />

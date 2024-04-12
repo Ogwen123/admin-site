@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { UserGroupIcon, CloudIcon } from '@heroicons/react/20/solid'
+import { UserGroupIcon, CloudIcon, ChartBarIcon } from '@heroicons/react/20/solid'
 import { SidebarTab, SubSelected } from '../global/types'
 import { Link } from 'react-router-dom'
 import { url } from '../utils/url'
@@ -38,14 +38,14 @@ const SideBar = () => {
 
     const sidebarTabs: SidebarTab[] = [
         {
-            id: 1,
+            id: 0,
             name: "Users",
             url: "/users",
             icon: <UserGroupIcon className='h-7 w-7' />,
 
         },
         {
-            id: 2,
+            id: 1,
             name: "Services",
             url: "/services",
             icon: <CloudIcon className='h-7 w-7' />,
@@ -56,6 +56,12 @@ const SideBar = () => {
                     url: "/services/add"
                 }
             ]
+        },
+        {
+            id: 2,
+            name: "Statistics",
+            url: "/statistics",
+            icon: <ChartBarIcon className='h-7 w-7' />
         }
     ]
 
