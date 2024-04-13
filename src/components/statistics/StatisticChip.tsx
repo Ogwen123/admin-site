@@ -14,10 +14,10 @@ const Inner = ({ name, value }: StatisticChipProp) => {
     return (
         <div className="w-full h-full flex flex-col">
             <div className="w-full h-[95%] fc flex-row">
-                <div className="w-1/2 flex justify-end mr-[3px] text-4xl text-main group-hover:text-white">
+                <div className="w-1/2 h-[50px] flex justify-end items-end mr-[3px] text-4xl text-main group-hover:text-white group-hover:text-[2.75rem] group-hover:transition-all">
                     {value}
                 </div>
-                <div className="w-1/2 flex ml-[3px] items-end h-10 text-2xl text-main group-hover:text-white">
+                <div className="w-1/2 h-[50px] flex ml-[3px] items-end text-2xl text-main group-hover:text-white group-hover:text-[1.75rem] group-hover:transition-all">
                     {name[0].toUpperCase() + name.slice(1).toLowerCase()}
                 </div>
             </div>
@@ -34,7 +34,7 @@ const StatisticChip = ({ name, value, side }: StatisticChipProp) => {
     const { updateSidebar, setUpdateSidebar } = useUser()
 
     return (
-        <div className={"group w-[calc(50%-5px)] h-[300px] bg-bgdark hover:bg-main mb-[10px] p-[10px] rounded-md " + (side === "RIGHT" ? "ml-[5px] " : "mr-[5px] ") + (Object.keys(overrideLinks).includes(name) ? "cursor-pointer" : "cursor-auto")}>
+        <div className={"group w-[calc(50%-5px)] h-[300px] bg-bgdark hover:bg-main mb-[10px] p-[10px] rounded-md hover:transition-colors " + (side === "RIGHT" ? "ml-[5px] " : "mr-[5px] ") + (Object.keys(overrideLinks).includes(name) ? "cursor-pointer" : "cursor-auto")}>
             {
                 Object.keys(overrideLinks).includes(name) ?
                     <Link className="h-full w-full block" to={overrideLinks[name]!} onClick={() => setUpdateSidebar(!updateSidebar)}>
