@@ -22,6 +22,7 @@ const Login = () => {
             body: JSON.stringify({
                 identifier: username,
                 password,
+                service: "ADMIN",
                 min_flag: 3
             })
         }).then((res) => {
