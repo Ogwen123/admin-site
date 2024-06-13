@@ -17,6 +17,7 @@ import Home from "./components/routes/Home";
 import AddService from "./components/routes/AddService";
 import NotFound from "./components/NotFound";
 import Statistics from "./components/routes/Statistics";
+import User from "./components/routes/User";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -27,6 +28,7 @@ const router = createBrowserRouter(
                 <Route path="/services" element={<Services />} />
                 <Route path="/services/add" element={<AddService />} />
                 <Route path="/statistics" element={<Statistics />} />
+                <Route path="/user/:id" element={<User />} />
                 <Route path="*" element={<NotFound />} />
             </Route>
             <Route path="/login" element={<Login />} />

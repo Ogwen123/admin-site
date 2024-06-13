@@ -91,7 +91,7 @@ const SideBar = () => {
             {
                 sidebarTabs.map((tab, index) => {
 
-                    let colour = "bg-bgdark"
+                    let colour = " bg-bgdark hover:bg-hrdark"
 
                     if (tab.id === selected) {
                         colour = " bg-main"
