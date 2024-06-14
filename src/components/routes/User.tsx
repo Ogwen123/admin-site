@@ -3,7 +3,8 @@ import { UserData } from '../../global/types'
 
 const User = () => {
 
-    const [usersData, setUsersData] = React.useState<UserData>()
+    const [_usersData, _setUsersData] = React.useState<UserData>()
+
 
     return (
         <div>User</div>
