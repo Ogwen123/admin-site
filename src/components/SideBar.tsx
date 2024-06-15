@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { UserGroupIcon, CloudIcon, ChartBarIcon } from '@heroicons/react/20/solid'
+import { UserGroupIcon, CloudIcon, ChartBarIcon, ChartPieIcon } from '@heroicons/react/20/solid'
 import { SidebarTab, SubSelected } from '../global/types'
 import { Link } from 'react-router-dom'
 import { url } from '../utils/url'
@@ -16,7 +16,6 @@ const SideBar = () => {
     const [loggingOut, setLoggingOut] = React.useState<boolean>(false)
 
     React.useEffect(() => {
-        console.log("updating sidebar")
         for (let i of sidebarTabs) {
             if (location.href.endsWith(i.url)) {
                 setSelected(i.id)
@@ -61,6 +60,12 @@ const SideBar = () => {
             id: 2,
             name: "Statistics",
             url: "/statistics",
+            icon: <ChartPieIcon className='h-7 w-7' />
+        },
+        {
+            id: 3,
+            name: "Analytics",
+            url: "/analytics",
             icon: <ChartBarIcon className='h-7 w-7' />
         }
     ]
