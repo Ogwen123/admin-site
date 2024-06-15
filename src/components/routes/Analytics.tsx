@@ -1,5 +1,5 @@
 import React from 'react'
-import { _Alert, _Analytics, AnalyticSettings, RechartData } from '../../global/types'
+import { _Alert, _Analytics, AnalyticSettings } from '../../global/types'
 import { url } from '../../utils/url'
 import Alert, { alertReset } from '../Alert'
 import { useUser } from '../../App'
