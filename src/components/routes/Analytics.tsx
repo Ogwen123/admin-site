@@ -198,7 +198,10 @@ const Analytics = () => {
                                         dx={5}
                                         height={100}
                                     />
-                                    <YAxis domain={[0, Math.round((analyticsMetaData.logins.maxValue * 1.2) / 2) * 2]} /> {/*this might break as the numbers get bigger not sure might just remove it*/}
+                                    <YAxis
+                                        allowDecimals={false}
+                                        domain={[0, Math.round((analyticsMetaData.logins.maxValue * 1.2) / 2) * 2] /*this might break as the numbers get bigger not sure might just remove it*/}
+                                    />
                                 </LineChart>
                             </div>
                             <div className='w-[600px] h-[560px] p-[20px] bg-bgdark rounded-md'>
@@ -323,7 +326,7 @@ const Analytics = () => {
                                         dx={5}
                                         height={100}
                                     />
-                                    <YAxis />
+                                    <YAxis allowDecimals={false} />
                                 </LineChart>
                             </div>
 
