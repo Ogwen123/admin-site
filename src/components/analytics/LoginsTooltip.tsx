@@ -1,6 +1,6 @@
 import { lineColours } from "../routes/Analytics";
 
-const CustomTooltip = ({ active, payload, label, data }: any) => {
+const LoginsTooltip = ({ active, payload, label, data }: any) => {
     if (active && payload && payload.length) {
         return (
             <div className="bg-hr rounded-md w-[300px] flex flex-row">
@@ -42,4 +42,4 @@ const CustomTooltip = ({ active, payload, label, data }: any) => {
     }
 };
 
-export default CustomTooltip  
+export default LoginsTooltip  

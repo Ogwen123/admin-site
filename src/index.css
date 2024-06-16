@@ -31,7 +31,7 @@ hr {
         @apply bg-main w-full rounded-md p-[10px] my-[5px] hover:bg-maindark
     }
     .outlet {
-        @apply min-h-[calc(100vh-100px)]
+        @apply h-[calc(100vh-100px)]
     }
     .page-parent {
         @apply min-h-[calc(100vh-90px)]

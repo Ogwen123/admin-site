@@ -10,4 +10,9 @@
     - [ ] frontend for disabling a user on specific services
  - [ ] analytics
    - [x] login data route
-   - [ ] display login data
+   - [x] display login data graph
+   - [ ] display each type of failed login for each day in a table
+   - [ ] set a fixed scale for the graph
+   - [ ] allow for changing timescale
+   - [ ] make analytics for number of tables created
+   - [ ] make analytics for number of accounts registered

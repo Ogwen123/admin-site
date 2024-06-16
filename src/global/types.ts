@@ -65,17 +65,25 @@ export type Stats = {
 export type _Analytics = {
     logins: {
         [date: string]: { total: number, success: number, fail: number }
+    },
+    tables: {
+        [date: string]: number
     }
 }
 
 export type AnalyticSettings = {
-    timeframe: "DAY" | "MONTH",
-    type: "ALL" | "TOTAL" | "SUCCESS" | "FAIL"
+    logins: {
+        timeframe: "DAY" | "MONTH",
+        type: "ALL" | "TOTAL" | "SUCCESS" | "FAIL"
+    },
+    tables: {
+        timeframe: "DAY" | "MONTH",
+        type: "TOTAL" | "CREATED"
+    }
 }
 
-export type RechartData = {
-    name: string,
-    fails: number,
-    sucesses: number,
-    total: number
+export type AnalyticsMetaData = {
+    logins: {
+        maxValue: number
+    }
 }
