@@ -30,7 +30,7 @@ const Analytics = () => {
 
     const [analytics, setAnalytics] = React.useState<_Analytics>({ logins: {}, tables: {}, loginFails: {} })
     const [analyticsMetaData, setAnalyticsMetaData] = React.useState<AnalyticsMetaData>({ logins: { maxValue: 0, successTotal: 0, failTotal: 0 } })
-    const [analyticSettings, setAnalyticSettings] = React.useState<AnalyticSettings>({ logins: { timeframe: "DAY", type: "ALL" }, tables: { timeframe: "MONTH", type: "TOTAL" } })
+    const [analyticSettings, setAnalyticSettings] = React.useState<AnalyticSettings>({ logins: { timeframe: "MONTH", type: "ALL" }, tables: { timeframe: "MONTH", type: "TOTAL" } })
     const [rechartsData, setRechartsData] = React.useState<any>({ logins: {}, tables: {}, loginFails: {} })
 
     const [alert, setAlert] = React.useState<_Alert>(["Alert", "ERROR", false])
@@ -91,6 +91,7 @@ const Analytics = () => {
         })
 
 
+
         // fetch tables analytics
         fetch(url("admin") + "analytics/tables", {
             method: "POST",
@@ -142,6 +143,8 @@ const Analytics = () => {
                 })
             }
         })
+
+
 
         // fetch login fail analytics
         fetch(url("admin") + "analytics/login/fails", {
@@ -207,6 +210,8 @@ const Analytics = () => {
         })
     }, [])
 
+
+
     const formatName = (name: string) => {
         const SPLIT_LENGTH = 15
         let buffer = ""
@@ -221,6 +226,8 @@ const Analytics = () => {
         }
         return buffer
     }
+
+
 
     return (
         <div className='outlet overflow-y-auto'>
@@ -304,9 +311,9 @@ const Analytics = () => {
                                     <XAxis
                                         dataKey="name"
                                         angle={90}
-                                        dy={35}
+                                        dy={analyticSettings.logins.timeframe === "MONTH" ? 35 : 50}
                                         dx={5}
-                                        height={100}
+                                        height={125}
                                     />
                                     <YAxis
                                         allowDecimals={false}
@@ -565,9 +572,9 @@ const Analytics = () => {
                                     <XAxis
                                         dataKey="name"
                                         angle={90}
-                                        dy={35}
+                                        dy={analyticSettings.logins.timeframe === "MONTH" ? 35 : 50}
                                         dx={5}
-                                        height={100}
+                                        height={125}
                                     />
                                     <YAxis allowDecimals={false} />
                                 </LineChart>
