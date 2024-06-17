@@ -62,12 +62,24 @@ export type Stats = {
     services: number
 }
 
+export type LoginFailObject = {
+    INVALID_BODY: number,
+    INCORRECT_IDENTIFIER: number,
+    INCORRECT_PASSWORD: number,
+    INSUFFICIENT_PERMISSIONS: number,
+    DISABLED_ACCOUNT: number,
+    INSUFFICIENT_SERVICE_PERMISSIONS: number
+}
+
 export type _Analytics = {
     logins: {
         [date: string]: { total: number, success: number, fail: number }
     },
     tables: {
         [date: string]: number
+    },
+    loginFails: {
+        [date: string]: LoginFailObject
     }
 }
 
@@ -84,6 +96,8 @@ export type AnalyticSettings = {
 
 export type AnalyticsMetaData = {
     logins: {
-        maxValue: number
+        maxValue: number,
+        successTotal: number,
+        failTotal: number
     }
 }

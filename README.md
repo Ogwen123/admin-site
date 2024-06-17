@@ -11,8 +11,8 @@
  - [ ] analytics
    - [x] login data route
    - [x] display login data graph
-   - [ ] display each type of failed login for each day in a table
-   - [ ] set a fixed scale for the graph
+   - [x] display each type of failed login for each day in a table
+   - [x] fix graph scale
    - [ ] allow for changing timescale
-   - [ ] make analytics for number of tables created
+   - [x] make analytics for number of tables created
    - [ ] make analytics for number of accounts registered
