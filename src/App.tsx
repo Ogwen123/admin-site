@@ -1,7 +1,7 @@
 import React from 'react'
-import { Outlet, useOutletContext } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 import NavigationBar from './components/NavigationBar'
-import { AppOutletContext, Layout, User } from './global/types'
+import { Layout, User } from './global/types'
 
 const App = () => {
 

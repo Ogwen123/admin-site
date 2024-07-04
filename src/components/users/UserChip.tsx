@@ -4,7 +4,7 @@ import { flagBFToPerms } from '../../utils/permissions'
 import LoadingWheel from '../LoadingWheel'
 import { url } from '../../utils/url'
 import { alertReset } from '../Alert'
-import { useOutletContext } from 'react-router-dom'
+import { Link, useOutletContext } from 'react-router-dom'
 
 interface UserChipProps {
     userData: UserData,
@@ -34,7 +34,7 @@ const UserChip = ({ userData, permissions, setUsers, setAlert }: UserChipProps) 
     }, [updatedPermissions])
 
     const updateUser = () => {
-        fetch(url("admin") + "user/change-permissions", {
+        fetch(url("admin") + "user/permissions", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -150,6 +150,13 @@ const UserChip = ({ userData, permissions, setUsers, setAlert }: UserChipProps) 
                                     Reset Changes
                                 </button>
                             </div>
+                            <Link to={"/user/" + userData.id}>
+                                <button
+                                    className='button bg-main hover:bg-maindark disabled:hover:bg-main disabled:opacity-50'
+                                >
+                                    View User
+                                </button>
+                            </Link>
                         </div>
                         :
                         <LoadingWheel size={30} />
