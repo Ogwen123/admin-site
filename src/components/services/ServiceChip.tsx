@@ -1,8 +1,8 @@
 //import React from 'react'
 import { Switch } from '@headlessui/react'
-import { _Alert, ServiceData } from '../../global/types'
+import { _Alert, AppOutletContext, ServiceData } from '../../global/types'
 import { url } from '../../utils/url'
-import { useUser } from '../../App'
+import { useOutletContext } from 'react-router-dom'
 import { alertReset } from '../Alert'
 
 interface ServiceChipProps {
@@ -13,7 +13,7 @@ interface ServiceChipProps {
 
 const ServiceChip = ({ service, setServices, setAlert }: ServiceChipProps) => {
 
-    const { user } = useUser()
+    const { user } = useOutletContext<AppOutletContext>()
 
     const flipToggle = (to?: boolean) => {
         setServices((prevServices) => (prevServices?.map((prevService: ServiceData) => {

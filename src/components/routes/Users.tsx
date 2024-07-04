@@ -1,15 +1,16 @@
 //import React from 'react'
 
 import React from "react"
-import { useUser } from "../../App"
-import { Permissions, UserData, _Alert } from "../../global/types"
+import { useOutletContext } from "react-router-dom"
+import { AppOutletContext, Permissions, UserData, _Alert } from "../../global/types"
 import Alert, { alertReset } from "../Alert"
 import { url } from "../../utils/url"
 import UserChip from "../users/UserChip"
 import LoadingWheel from "../LoadingWheel"
+import { MagnifyingGlassIcon } from "@heroicons/react/20/solid"
 
 const Users = () => {
-    const { user } = useUser()
+    const { user, layout } = useOutletContext<AppOutletContext>()
 
     const [users, setUsers] = React.useState<UserData[]>()
     const [query, setQuery] = React.useState<string>("")
@@ -21,6 +22,7 @@ const Users = () => {
     const [alert, setAlert] = React.useState<_Alert>(["Alert", "ERROR", false])
 
     React.useEffect(() => {
+        console.log(layout)
         fetch(url("auth") + "permissions", {
             method: "GET",
             headers: {
@@ -38,10 +40,6 @@ const Users = () => {
         })
         fetchUsers()
     }, [])
-
-    React.useEffect(() => {
-        console.log(users)
-    }, [users])
 
     const searchUsers = async (queryOverride?: string) => {
         if (query === "" || queryOverride === "") setDisplayType("ADMIN")
@@ -115,6 +113,7 @@ const Users = () => {
     return (
         <div className='overflow-auto h-[calc(100vh-90px)]'>
             <Alert content={alert[0] instanceof Array ? alert[0][1] : alert[0]} severity={alert[1]} show={alert[2]} title={alert[0] instanceof Array ? alert[0][0] : undefined} />
+            layout: {layout.layout}
             <div className='flex flex-row w-full h-[55px] mt-[10px]'>
                 <input
                     value={query}
@@ -134,7 +133,14 @@ const Users = () => {
                         searchLoading ?
                             <LoadingWheel size={24} />
                             :
-                            <div>Search</div>
+                            <div className="fc">
+                                {
+                                    layout.layout === "DESKTOP" ?
+                                        <div>Search</div>
+                                        :
+                                        <MagnifyingGlassIcon className="w-7 h-7" />
+                                }
+                            </div>
                     }
                 </button>
                 <button
@@ -159,6 +165,7 @@ const Users = () => {
                                     className="h-[250px]"
                                     style={{
                                         width: "calc((100% / 3) - " + (index % 3 === 0 ? "5px)" : index % 3 === 2 ? "5px)" : "10px)"),
+                                        minWidth: "250px",
                                         marginLeft: (index % 3 === 0 ? "0px" : index % 3 === 2 ? "5px" : "5px"),
                                         marginRight: (index % 3 === 0 ? "5px" : index % 3 === 2 ? "0px" : "5px")
                                     }}

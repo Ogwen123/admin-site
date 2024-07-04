@@ -1,8 +1,8 @@
 import React from 'react'
-import { _Alert, _Analytics, AnalyticSettings, AnalyticsMetaData, LoginFailObject } from '../../global/types'
+import { _Alert, _Analytics, AnalyticSettings, AnalyticsMetaData, AppOutletContext, LoginFailObject } from '../../global/types'
 import { url } from '../../utils/url'
 import Alert, { alertReset } from '../Alert'
-import { useUser } from '../../App'
+import { useOutletContext } from 'react-router-dom'
 import LoadingWheel from '../LoadingWheel'
 import { CartesianGrid, Cell, Legend, Line, LineChart, Pie, PieChart, Tooltip, XAxis, YAxis } from 'recharts'
 import LoginsTooltip from '../analytics/LoginsTooltip'
@@ -26,7 +26,7 @@ const failTypes = ["INVALID_BODY", "INCORRECT_IDENTIFIER", "INCORRECT_PASSWORD",
 
 const Analytics = () => {
 
-    const { user } = useUser()
+    const { user } = useOutletContext<AppOutletContext>()
 
     const [analytics, setAnalytics] = React.useState<_Analytics>({ logins: {}, tables: {}, loginFails: {} })
     const [analyticsMetaData, setAnalyticsMetaData] = React.useState<AnalyticsMetaData>({ logins: { maxValue: 0, successTotal: 0, failTotal: 0 } })
@@ -237,7 +237,7 @@ const Analytics = () => {
                     <div className='flex flex-wrap pr-[5px]'>
 
                         <div className='flex flex-wrap justify-between w-full mb-[10px]'>
-                            <div className='w-[1000px] h-[560px] bg-bgdark pl-[30px] pr-[70px] py-[20px] rounded-md'>
+                            <div className='w-[calc(200%/3-5px)] h-[560px] bg-bgdark pl-[30px] pr-[70px] py-[20px] rounded-md'>
                                 <div className='flex flex-row justify-between mb-[10px]'>
                                     <div className='text-2xl ml-[70px] w-[100px]'>Logins</div>
                                     <TabGroup onChange={(index) => {
@@ -323,7 +323,7 @@ const Analytics = () => {
                                 </LineChart>
                             </div>
 
-                            <div className='w-[600px] h-[560px] p-[20px] bg-bgdark rounded-md'>
+                            <div className='w-[calc(100%/3-5px)] h-[560px] p-[20px] bg-bgdark rounded-md'>
                                 <div className='flex flex-row h-[80px]'>
                                     <div className='w-[40%] border-solid border-hr border-[1px] flex justify-center'>Date Range</div>
                                     <div
@@ -425,7 +425,7 @@ const Analytics = () => {
                         {/*-------------------------------------------------------------------------------------------------*/}
 
                         <div className='flex flex-wrap justify-between w-full mb-[10px]'>
-                            <div className='w-[550px] h-[560px] bg-bgdark pl-[30px] pr-[70px] py-[20px] rounded-md'>
+                            <div className='w-[calc(100%/3-5px)] h-[560px] bg-bgdark pl-[30px] pr-[70px] py-[20px] rounded-md'>
                                 <div className='flex flex-col justify-between mb-[10px]'>
                                     <div className='text-2xl w-[250px]'>Login Fail Reasons</div>
                                     <div className='text-hr'>
@@ -448,7 +448,7 @@ const Analytics = () => {
                                 </div>
                             </div>
 
-                            <div className='w-[1050px] h-[560px] bg-bgdark pl-[30px] pr-[70px] py-[20px] rounded-md'>
+                            <div className='w-[calc(200%/3-5px)] h-[560px] bg-bgdark pl-[30px] pr-[70px] py-[20px] rounded-md'>
                                 <div className='flex flex-col justify-between mb-[10px]'>
                                     <div className='text-2xl w-[250px]'>Login Fail Reasons</div>
                                     <div className='text-hr'>
@@ -521,7 +521,7 @@ const Analytics = () => {
                         {/*-------------------------------------------------------------------------------------------------*/}
 
                         <div className='flex flex-wrap justify-between w-full mb-[10px]'>
-                            <div className='w-[1000px] h-[560px] bg-bgdark pl-[30px] pr-[70px] py-[20px] rounded-md'>
+                            <div className='w-[calc(200%/3-5px)] h-[560px] bg-bgdark pl-[30px] pr-[70px] py-[20px] rounded-md'>
                                 <div className='flex flex-row justify-between mb-[10px]'>
                                     <div className='text-2xl ml-[70px] w-[100px]'>Tables</div>
                                     <TabGroup onChange={(index) => {

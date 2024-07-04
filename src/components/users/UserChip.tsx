@@ -1,10 +1,10 @@
 import React from 'react'
-import { _Alert, Permissions, UserData } from '../../global/types'
-import { useUser } from '../../App'
+import { _Alert, AppOutletContext, Permissions, UserData } from '../../global/types'
 import { flagBFToPerms } from '../../utils/permissions'
 import LoadingWheel from '../LoadingWheel'
 import { url } from '../../utils/url'
 import { alertReset } from '../Alert'
+import { useOutletContext } from 'react-router-dom'
 
 interface UserChipProps {
     userData: UserData,
@@ -15,7 +15,7 @@ interface UserChipProps {
 
 const UserChip = ({ userData, permissions, setUsers, setAlert }: UserChipProps) => {
 
-    const { user } = useUser()
+    const { user } = useOutletContext<AppOutletContext>()
 
     const [permissionArr, setPermissionArr] = React.useState<string[]>()
     const [changes, setChanges] = React.useState<boolean>(false)

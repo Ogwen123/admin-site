@@ -3,15 +3,15 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import React from 'react'
 import LoadingWheel from '../LoadingWheel'
 import { url } from '../../utils/url'
-import { useUser } from '../../App'
+import { useOutletContext } from 'react-router-dom'
 import Alert from '../Alert'
-import { _Alert } from '../../global/types'
+import { _Alert, AppOutletContext } from '../../global/types'
 
 // name, alias, type, togglable
 
 const AddService = () => {
 
-    const { user } = useUser()
+    const { user } = useOutletContext<AppOutletContext>()
     const [alert, setAlert] = React.useState<_Alert>(["Alert", "ERROR", false])
 
     const [name, setName] = React.useState<string>("")

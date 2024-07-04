@@ -1,10 +1,11 @@
 import React from 'react'
-import { useUser } from '../App'
+import { useOutletContext } from 'react-router-dom'
 import SideBar from './SideBar'
 import { Outlet } from 'react-router-dom'
+import { AppOutletContext } from '../global/types'
 
 const HomeTemplate = () => {
-    const { user } = useUser()
+    const { user } = useOutletContext<AppOutletContext>()
     const [page, setPage] = React.useState<string>("")
 
     React.useEffect(() => {

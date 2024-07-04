@@ -6,11 +6,16 @@ export type User = {
 
 export type AppOutletContext = {
     user: User,
+    layout: Layout,
     updateSidebar: boolean,
     setUpdateSidebar: React.Dispatch<React.SetStateAction<boolean | undefined>>
 }
 
 export type _Alert = [string | [string, string], "SUCCESS" | "ERROR", boolean]
+
+export type Layout = {
+    layout: "DESKTOP" | "MOBILE"
+}
 
 export type SubSite = {
     id: number,

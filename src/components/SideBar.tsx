@@ -1,15 +1,15 @@
 import React from 'react'
 
 import { UserGroupIcon, CloudIcon, ChartBarIcon, ChartPieIcon } from '@heroicons/react/20/solid'
-import { SidebarTab, SubSelected } from '../global/types'
+import { AppOutletContext, SidebarTab, SubSelected } from '../global/types'
 import { Link } from 'react-router-dom'
 import { url } from '../utils/url'
-import { useUser } from '../App'
+import { useOutletContext } from 'react-router-dom'
 import LoadingWheel from './LoadingWheel'
 
 const SideBar = () => {
 
-    const { user, updateSidebar, setUpdateSidebar } = useUser()
+    const { user, updateSidebar, setUpdateSidebar } = useOutletContext<AppOutletContext>()
 
     const [selected, setSelected] = React.useState<number>()
     const [subSelected, setSubSelected] = React.useState<SubSelected>()

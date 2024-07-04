@@ -1,7 +1,7 @@
 import React from 'react'
-import { ServicesFilters, ServiceData, _Alert } from '../../global/types'
+import { ServicesFilters, ServiceData, _Alert, AppOutletContext } from '../../global/types'
 import { url } from '../../utils/url'
-import { useUser } from '../../App'
+import { useOutletContext } from 'react-router-dom'
 import Alert, { alertReset } from '../Alert'
 import LoadingWheel from '../LoadingWheel'
 import { Listbox } from '@headlessui/react'
@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom'
 const initalFilter: ServicesFilters = { search: "", filter: "NONE" }
 
 const Services = () => {
-    const { user, updateSidebar, setUpdateSidebar } = useUser()
+    const { user, updateSidebar, setUpdateSidebar } = useOutletContext<AppOutletContext>()
 
     const [services, setServices] = React.useState<ServiceData[]>()
     const [shownServices, setShownServices] = React.useState<ServiceData[]>()

@@ -2,7 +2,8 @@
 import { Link } from "react-router-dom"
 import { overrideLinks } from "../routes/Statistics"
 import { ArrowRightIcon } from "@heroicons/react/20/solid"
-import { useUser } from "../../App"
+import { useOutletContext } from "react-router-dom"
+import { AppOutletContext } from "../../global/types"
 
 interface StatisticChipProp {
     name: string,
@@ -31,7 +32,7 @@ const Inner = ({ name, value }: StatisticChipProp) => {
 
 const StatisticChip = ({ name, value, side }: StatisticChipProp) => {
 
-    const { updateSidebar, setUpdateSidebar } = useUser()
+    const { updateSidebar, setUpdateSidebar } = useOutletContext<AppOutletContext>()
 
     return (
         <div className={"group w-[calc(50%-5px)] h-[300px] bg-bgdark hover:bg-main mb-[10px] p-[10px] rounded-md hover:transition-colors " + (side === "RIGHT" ? "ml-[5px] " : "mr-[5px] ") + (Object.keys(overrideLinks).includes(name) ? "cursor-pointer" : "cursor-auto")}>

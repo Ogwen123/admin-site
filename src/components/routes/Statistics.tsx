@@ -1,9 +1,9 @@
 import React from 'react'
-import { _Alert, Stats } from '../../global/types'
+import { _Alert, AppOutletContext, Stats } from '../../global/types'
 import LoadingWheel from '../LoadingWheel'
 import StatisticChip from '../statistics/StatisticChip'
 import { url } from '../../utils/url'
-import { useUser } from '../../App'
+import { useOutletContext } from 'react-router-dom'
 import Alert, { alertReset } from '../Alert'
 
 export const overrideLinks: { [id: string]: string } = {
@@ -13,7 +13,7 @@ export const overrideLinks: { [id: string]: string } = {
 
 const Statistics = () => {
 
-    const { user } = useUser()
+    const { user } = useOutletContext<AppOutletContext>()
 
     const [stats, setStats] = React.useState<Stats>()
 
