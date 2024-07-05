@@ -4,6 +4,7 @@ import { useOutletContext } from 'react-router-dom'
 import Alert, { alertReset } from '../Alert'
 import { url } from '../../utils/url'
 import LoadingWheel from '../LoadingWheel'
+import { title } from '../../utils/utils'
 
 const User = () => {
 
@@ -79,12 +80,36 @@ const User = () => {
         })
     }, [userId])
 
+
+    
     return (
         <div>
             <Alert content={alert[0] instanceof Array ? alert[0][1] : alert[0]} severity={alert[1]} show={alert[2]} title={alert[0] instanceof Array ? alert[0][0] : undefined} />
             {
                 usersData && permissions && servicesPermissions ?
-                    <div>loaded everything probably successfully</div>
+                    <div>
+                        <div className='p-[10px] bg-bgdark rounded-md w-full mb-[10px]'>
+                            <div className='text-xl'>User Information</div>
+                            <div className='flex flex-wrap'>
+                                {
+                                    Object.keys(usersData).map((key, index) => {
+                                        return (
+                                            <div key={index} className='w-1/3 my-[10px]'>
+                                                <div className='opacity-60'>{title(key)}</div>
+                                                <div>{usersData[key as keyof typeof usersData]}</div>
+                                            </div>
+                                        )
+                                    })
+                                }
+                            </div>
+                        </div>
+                        <div className='p-[10px] bg-bgdark rounded-md w-full mb-[10px]'>
+                            <div className='text-xl'>Change Permissions</div>
+                        </div>
+                        <div className='p-[10px] bg-bgdark rounded-md w-full mb-[10px]'>
+                            <div className='text-xl'>Service Specific Disabling</div>
+                        </div>
+                    </div>
                     :
                     <LoadingWheel />
             }
