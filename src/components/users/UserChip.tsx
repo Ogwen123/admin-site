@@ -34,7 +34,7 @@ const UserChip = ({ userData, permissions, setUsers, setAlert }: UserChipProps) 
     }, [updatedPermissions])
 
     const updateUser = () => {
-        fetch(url("admin") + "user/permissions", {
+        fetch(url("admin") + "user/change-permissions", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

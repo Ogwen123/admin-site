@@ -112,11 +112,106 @@ const User = () => {
     }, [permissionsLoaded])
 
     const updateUserPermissions = () => {
+        console.log(updatedPermissions)
 
+        if (!usersData ||
+            !permissions ||
+            !servicesPermissions ||
+            !permissionsArr ||
+            !servicePermissionsArr) return
+
+        fetch(url("admin") + "user/change-permissions", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + user.token
+            },
+            body: JSON.stringify({
+                id: userId,
+                new_perms: updatedPermissions
+            })
+        }).then((res) => {
+            if (!res.ok) {
+                res.json().then((data) => {
+                    setAlert([[`An error occured when updating this users permissions.`, (data.error instanceof Array ? data.error[0] : data.error)], "ERROR", true])
+
+                    setUpdatedPermissions(permissionsArr)
+
+                    setTimeout(() => {
+                        setAlert(alertReset)
+                    }, 5000)
+                })
+            } else {
+                res.json().then((data) => {
+                    setAlert([`Successfully updated permissions.`, "SUCCESS", true])
+
+                    const perms = flagBFToPerms(data.data.perm_flag, permissions)
+                    setPermissionsArr(perms)
+                    setUpdatedPermissions(perms)
+
+                    setTimeout(() => {
+                        setAlert(alertReset)
+                    }, 5000)
+                })
+            }
+        }).catch(() => {
+            setAlert([`An error occured when changing this users permissions.`, "ERROR", true])
+
+            setTimeout(() => {
+                setAlert(alertReset)
+            }, 5000)
+        })
     }
 
     const updateUserServicePermissions = () => {
 
+        if (!usersData ||
+            !permissions ||
+            !servicesPermissions ||
+            !permissionsArr ||
+            !servicePermissionsArr) return
+
+        fetch(url("admin") + "user/change-service-permissions", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + user.token
+            },
+            body: JSON.stringify({
+                id: userId,
+                new_perms: updatedServicePermissions
+            })
+        }).then((res) => {
+            if (!res.ok) {
+                res.json().then((data) => {
+                    setAlert([[`An error occured when updating this users permissions.`, (data.error instanceof Array ? data.error[0] : data.error)], "ERROR", true])
+
+                    setUpdatedServicePermissions(servicePermissionsArr)
+
+                    setTimeout(() => {
+                        setAlert(alertReset)
+                    }, 5000)
+                })
+            } else {
+                res.json().then((data) => {
+                    setAlert([`Successfully updated permissions.`, "SUCCESS", true])
+
+                    const perms = flagBFToPerms(data.data.perm_flag, servicesPermissions)
+                    setServicePermissionsArr(perms)
+                    setUpdatedServicePermissions(perms)
+
+                    setTimeout(() => {
+                        setAlert(alertReset)
+                    }, 5000)
+                })
+            }
+        }).catch(() => {
+            setAlert([`An error occured when changing this users permissions.`, "ERROR", true])
+
+            setTimeout(() => {
+                setAlert(alertReset)
+            }, 5000)
+        })
     }
 
     const compareArray = (arr1: any[], arr2: any[]) => {
@@ -136,7 +231,7 @@ const User = () => {
     }
 
     return (
-        <div>
+        <div className='outlet overflow-y-auto'>
             <Alert content={alert[0] instanceof Array ? alert[0][1] : alert[0]} severity={alert[1]} show={alert[2]} title={alert[0] instanceof Array ? alert[0][0] : undefined} />
             {
                 usersData &&
@@ -148,7 +243,7 @@ const User = () => {
                     updatedServicePermissions
                     ?
                     <div>
-                        <div className='p-[10px] bg-bgdark rounded-md w-full mb-[10px]'>
+                        <div className='p-[10px] bg-bgdark rounded-md w-full mt-[5px] mb-[10px]'>
                             <div className='text-xl'>User Information</div>
                             <div className='flex flex-wrap'>
                                 {
@@ -163,8 +258,16 @@ const User = () => {
                                 }
                             </div>
                         </div>
-                        <div className='p-[10px] bg-bgdark rounded-md w-full mb-[10px]'>
-                            <div className='text-xl'>Change Permissions</div>
+                        <div
+                            className={'p-[10px] bg-bgdark rounded-md w-full my-[10px] ' + (permissionsArr.length === 0 ? "bg-error bg-opacity-40" : "")}
+                        >
+                            <div className='text-xl flex flex-row'>
+                                Change Permissions
+                                {
+                                    permissionsArr.length === 0 &&
+                                    <div className='bold text-error ml-[calc(50%-282px)]'>This account is disabled</div>
+                                }
+                            </div>
                             <div className='flex flex-wrap'>
                                 {
                                     Object.values(permissions).map((perm, index) => {
@@ -202,7 +305,7 @@ const User = () => {
                                 </button>
                             </div>
                         </div>
-                        <div className='p-[10px] bg-bgdark rounded-md w-full mb-[10px]'>
+                        <div className='p-[10px] bg-bgdark rounded-md w-full my-[10px]'>
                             <div className='text-xl'>
                                 Change Service Permissions
                                 <div className='text-hr text-xs'>Ticked means disabled</div>
