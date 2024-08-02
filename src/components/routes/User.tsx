@@ -26,8 +26,9 @@ const User = () => {
 
     const [alert, setAlert] = React.useState<_Alert>(["Alert", "ERROR", false])
 
-    React.useEffect(() => {
 
+
+    React.useEffect(() => {
         const splitLoc = location.pathname.split("/")
         const id = splitLoc[splitLoc.length - 1]
 
@@ -45,7 +46,6 @@ const User = () => {
             } else {
                 res.json().then((data) => {
                     setPermissions(data.data)
-
                 })
             }
         })
@@ -65,9 +65,9 @@ const User = () => {
                 })
             }
         })
-
-
     }, [])
+
+
 
     React.useEffect(() => {
         if (userId !== undefined) {
@@ -82,6 +82,8 @@ const User = () => {
             setPermissionsLoaded((prev) => ({ ...prev, serv: true }))
         }
     }, [userId, permissions, servicesPermissions])
+
+
 
     React.useEffect(() => {
         if (permissionsLoaded.id !== true || permissionsLoaded.perm !== true || permissionsLoaded.serv !== true) return
@@ -110,6 +112,8 @@ const User = () => {
             }
         })
     }, [permissionsLoaded])
+
+
 
     const updateUserPermissions = () => {
         console.log(updatedPermissions)
@@ -163,6 +167,8 @@ const User = () => {
         })
     }
 
+
+
     const updateUserServicePermissions = () => {
 
         if (!usersData ||
@@ -214,6 +220,8 @@ const User = () => {
         })
     }
 
+
+
     const compareArray = (arr1: any[], arr2: any[]) => {
         if (arr1.length !== arr2.length) return false
 
@@ -229,6 +237,8 @@ const User = () => {
         }
         return same
     }
+
+
 
     return (
         <div className='outlet overflow-y-auto'>
@@ -310,7 +320,7 @@ const User = () => {
                                 Change Service Permissions
                                 <div className='text-hr text-xs'>Ticked means disabled</div>
                             </div>
-                            <div>
+                            <div className='flex flex-row'>
                                 {
                                     Object.values(servicesPermissions).map((perm, index) => {
                                         return (
