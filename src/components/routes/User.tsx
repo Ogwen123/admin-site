@@ -320,7 +320,7 @@ const User = () => {
                                 Change Service Permissions
                                 <div className='text-hr text-xs'>Ticked means disabled</div>
                             </div>
-                            <div className='flex flex-row'>
+                            <div className='flex flex-row flex-wrap'>
                                 {
                                     Object.values(servicesPermissions).map((perm, index) => {
                                         return (
