@@ -323,7 +323,7 @@ const Analytics = () => {
                                 </LineChart>
                             </div>
 
-                            <div className='w-[calc(100%/3-5px)] h-[560px] p-[20px] bg-bgdark rounded-md'>
+                            <div className='w-[calc(100%/3-5px)] h-[560px] p-[20px] bg-bgdark rounded-md overflow-auto'>
                                 <div className='flex flex-row h-[80px]'>
                                     <div className='w-[40%] border-solid border-hr border-[1px] flex justify-center'>Date Range</div>
                                     <div
