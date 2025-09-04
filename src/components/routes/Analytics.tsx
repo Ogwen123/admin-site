@@ -425,7 +425,7 @@ const Analytics = () => {
                         {/*-------------------------------------------------------------------------------------------------*/}
 
                         <div className='flex flex-wrap justify-between w-full mb-[10px]'>
-                            <div className='w-[calc(100%/3-5px)] h-[560px] bg-bgdark pl-[30px] pr-[70px] py-[20px] rounded-md overflow-auto'>
+                            <div className='w-[calc(100%/3-5px)] h-[560px] bg-bgdark pl-[30px] pr-[70px] py-[20px] rounded-md'>
                                 <div className='flex flex-col justify-between mb-[10px]'>
                                     <div className='text-2xl w-[250px]'>Login Fail Reasons</div>
                                     <div className='text-hr'>
@@ -448,7 +448,7 @@ const Analytics = () => {
                                 </div>
                             </div>
 
-                            <div className='w-[calc(200%/3-5px)] h-[560px] bg-bgdark pl-[30px] pr-[70px] py-[20px] rounded-md'>
+                            <div className='w-[calc(200%/3-5px)] h-[560px] bg-bgdark pl-[30px] pr-[70px] py-[20px] rounded-md overflow-auto'>
                                 <div className='flex flex-col justify-between mb-[10px]'>
                                     <div className='text-2xl w-[250px]'>Login Fail Reasons</div>
                                     <div className='text-hr'>
